@@ -16,13 +16,19 @@
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;
+            align-items: center; /* Center horizontally */
         }
         .instrument img {
             width: 100%;
             height: auto;
         }
         .instrument-details {
+            text-align: center; /* Center text horizontally */
             margin-top: auto; /* Align at the bottom */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            height: 100%; /* Occupy full height of the container */
         }
         .instrument-details h2,
         .instrument-details p {
@@ -88,7 +94,6 @@
     
 
 <!-- Row 4 -->
-
 <div class="instrument-container">
     <div class="instrument">
         <img src="ICPMS.jpg" alt="ICPMS">
