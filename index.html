@@ -1,234 +1,522 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ziliang's Homepage — Dr. Ziliang Jin</title>
+    <meta name="description" content="Ziliang Jin is an assistant professor at the State Key Lab of Lunar and Planetary Science">
+    <link rel="icon" type="image/png" href="ziliang_profile.JPG">
 
-  <title>Ziliang's Homepage</title>
+    <style>
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #161617;
+            --bg-card: #1c1c1e;
+            --bg-card-hover: #2c2c2e;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent-blue: #2997ff;
+            --accent-orange: #f56300;
+            --border-color: #333336;
+            --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="description" content="Ziliang Jin is an assistant professor at the State Key Lab of Lunar and Planetar Science">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
 
-  <link rel="stylesheet" href="w3.css">
+        html {
+            scroll-behavior: smooth;
+        }
 
-  <style>
-  .w3-sidebar a {font-family: "Roboto", sans-serif}
-  body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
-  </style>
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            font-weight: 400;
+            letter-spacing: -.022em;
+        }
 
-  <link rel="icon" type="image/png" href="ziliang_profile.JPG">
-  <!--
-  <script src="jquery.min.js"></script>
-  <script>
-  $(document).ready(function(){
-    // Add smooth scrolling to all links
-    $("a").on('click', function(event) {
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
 
-      // Make sure this.hash has a value before overriding default behavior
-      if (this.hash !== "") {
-        // Prevent default anchor click behavior
-        event.preventDefault();
+        a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
 
-        // Store hash
-        var hash = this.hash;
+        /* Apple Navigation Bar */
+        nav.apple-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 9999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-        // Using jQuery's animate() method to add smooth page scroll
-        // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-        $('html, body').animate({
-          scrollTop: $(hash).offset().top
-        }, 800, function(){
+        .nav-content {
+            max-width: 1024px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            font-size: 13px;
+        }
 
-          // Add hash (#) to URL when done scrolling (default click behavior)
-          window.location.hash = hash;
-        });
-      } // End if
-    });
-  });
-  </script>
-  //-->
+        .nav-logo {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
 
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        /* Container Layout */
+        .page-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 80px 20px 60px;
+        }
+
+        /* Hero / Profile Section */
+        .hero-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .hero-name {
+            font-size: 42px;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            background: linear-gradient(180deg, #fff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-title {
+            font-size: 20px;
+            color: var(--accent-blue);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .hero-affiliation {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 16px;
+            font-size: 15px;
+            font-weight: 500;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .profile-img-container {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: -.005em;
+            color: var(--text-primary);
+        }
+
+        .bento-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        /* List Formatting */
+        .apple-list {
+            list-style: none;
+        }
+
+        .apple-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .apple-list li::before {
+            content: "•";
+            color: var(--accent-blue);
+            font-weight: bold;
+            font-size: 18px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .apple-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Experience Entry Styling */
+        .exp-group {
+            margin-bottom: 28px;
+        }
+
+        .exp-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .exp-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 12px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* News Section Badge */
+        .news-date {
+            display: inline-block;
+            background: rgba(41, 151, 255, 0.15);
+            color: var(--accent-blue);
+            font-weight: 600;
+            font-size: 13px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-right: 8px;
+        }
+
+        /* Publication styling */
+        .pub-list li {
+            padding-left: 0;
+            margin-bottom: 18px;
+        }
+
+        .pub-list li::before {
+            content: "";
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Apple-Style Visitor Counter Badge at Bottom */
+        .visitor-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .visitor-counter img {
+            height: 18px;
+            display: block;
+            filter: brightness(0.95);
+        }
+
+        @media (max-width: 768px) {
+            .hero-card {
+                text-align: center;
+                justify-content: center;
+                padding: 30px 20px;
+            }
+            .hero-name { font-size: 32px; }
+            .hero-links { justify-content: center; }
+            .profile-img-container {
+                width: 140px;
+                height: 140px;
+            }
+        }
+    </style>
 </head>
 
+<body>
 
-<body class="w3-content" style="max-width:1000px">
+    <!-- Apple Navigation Bar -->
+    <nav class="apple-nav">
+        <div class="nav-content">
+            <span class="nav-logo">Ziliang Jin</span>
+            <div class="nav-links">
+                <a href="#Home">Home</a>
+                <a href="#Research">Research</a>
+                <a href="#Fund">Grants</a>
+                <a href="#Experience">Experience</a>
+                <a href="#Publications">Publications</a>
+                <a href="#News">News</a>
+                <a href="Ziliang Jin-cv (20260817).pdf">CV</a>
+                <a href="https://www.must.edu.mo/en/ssi">SKLplanets</a>
+                <a href="instruments.html">Instruments</a>
+            </div>
+        </div>
+    </nav>
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-bar-block w3-black w3-collapse w3-top w3-right" style="z-index:3;width:150px" id="mySidebar">
-  <div class="w3-container w3-display-container w3-padding-16">
-    <h3><b>Ziliang</b></h3>
-  </div>
-  <div class="w3-padding-64 w3-text-light-grey w3-large" style="font-weight:bold">
-    <a href="#Home" class="w3-bar-item w3-button">Home</a>
-    <a href="#Research" class="w3-bar-item w3-button">Research Interests</a>
-    <a href="#Fund" class="w3-bar-item w3-button">Fund</a>
-    <a href="#Experience" class="w3-bar-item w3-button">Professional Experiences</a>
-    <a href="#Publications" class="w3-bar-item w3-button">Publications</a>
-    <a href="#News" class="w3-bar-item w3-button">News</a>
-    <a href="Ziliang Jin-cv (20260817).pdf" class="w3-bar-item w3-button">CV</a>
-    <a href="https://www.must.edu.mo/en/ssi" class="w3-bar-item w3-button">SKLplanets</a>
-    <a href="instruments.html" class="w3-bar-item w3-button">Instruments</a>
-  </div>
-</nav>
+    <div class="page-container">
 
-<!-- Top menu on small screens -->
-<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24">金子梁</div>
-  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right"  style="font-stretch: extra-expanded;" onclick="w3_open()"><b>≡</b></a>
-  </div>
-</header>
+        <!-- Hero Section -->
+        <section id="Home">
+            <div class="hero-card">
+                <div class="hero-text">
+                    <h1 class="hero-name">金子梁 (JIN Ziliang)</h1>
+                    <div class="hero-title">Assistant Professor</div>
+                    <div class="hero-affiliation">
+                        State Key Lab of Lunar and Planetary Science<br>
+                        Macau University of Science and Technology<br>
+                        Macau, China
+                    </div>
+                    <div class="hero-links">
+                        <a href="mailto:zljin@must.edu.mo">Email</a>
+                        <span>•</span>
+                        <a href="https://scholar.google.com/citations?user=IO9AYxkAAAAJ&hl=en" target="_blank">Google Scholar</a>
+                    </div>
+                </div>
+                <div class="profile-img-container">
+                    <img src="profile.jpg" alt="Ziliang Jin Profile Image">
+                </div>
+            </div>
+        </section>
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+        <!-- Research Interests -->
+        <section id="Research">
+            <h2 class="section-header">Research Interests</h2>
+            <div class="bento-card">
+                <ul class="apple-list">
+                    <li>Derivation and migration of the primordial materials in the solar system</li>
+                    <li>Planet differentiation processes</li>
+                    <li>Space process laboratory simulations</li>
+                </ul>
+            </div>
+        </section>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:150px">
+        <!-- Grants / Funding -->
+        <section id="Fund">
+            <h2 class="section-header">Fund & Grants</h2>
+            <div class="bento-card">
+                <ul class="apple-list">
+                    <li><b>FDCT</b> (2021-2023) – PI: A comprehensive study of mineral disequilibrium in the achondrite EC002.</li>
+                    <li><b>FDCT</b> (2023-2024) – PI: Process development: ion-implanted reference materials used for in-situ analysis.</li>
+                    <li><b>NSFC</b> (2023-2025) – PI: A comprehensive study of the hydrogen implantation-diffusion process that hydrates the silicates in the solar nebula.</li>
+                    <li><b>FDCT</b> (2025-2028) – Co-PI: Research on key scientific and technological questions in extraterrestrial sample analysis.</li>
+                </ul>
+            </div>
+        </section>
 
-  <!-- Push down content on small screens -->
-  <div class="w3-hide-large" style="margin-top:83px"></div>
+        <!-- Professional Experiences -->
+        <section id="Experience">
+            <h2 class="section-header">Professional Experiences</h2>
+            <div class="bento-card">
+                
+                <div class="exp-group">
+                    <div class="exp-header">Since 2020 — Macao University of Science and Technology, China</div>
+                    <ul class="apple-list">
+                        <li>Managing: (1) Laser ablation-inductively coupled plasma mass spectrometry (LA-ICP-MS), GeoLasHD + Agilent 7900; (2) Ion implanter</li>
+                        <li>Simulating the hydration processes of the early solar system materials via ion implantation.</li>
+                        <li>Research on the loss of volatile elements of the Moon.</li>
+                    </ul>
+                </div>
 
-<!-- The Home Section -->
-<div class="w3-container w3-center w3-padding-32" id="Home">
-    <div style="float: left; width: 50%;">
-        <h1>金子梁 (JIN Ziliang)</h1>
-        <p class="w3-justify" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;max-width:600px">
-        <p>Assistant Professor<br />
-            State Key Lab of Lunar and Planetary Science<br />
-            Macau University of Science and Technology <br />
-            Macau, China <br /> 
-        </p>
-        <p class="w3-center">
-            <a href="mailto:zljin@must.edu.mo">Email</a> &nbsp;/&nbsp;
-            <a href="https://scholar.google.com/citations?user=IO9AYxkAAAAJ&hl=en">Google Scholar</a>
-        </p>
-        </tbody></table>
+                <div class="exp-group">
+                    <div class="exp-header">2017 - 2020 — Arizona State University, Arizona, U.S.</div>
+                    <ul class="apple-list">
+                        <li>Sustaining laboratory services: daily checking and maintaining, ordering and purchasing lab items, scheduling and executing.</li>
+                        <li>Development of key protocols for high-precision H measurement using the NanoSIMS 50L at ASU.</li>
+                        <li>Study of the hydrogen isotope systematics of nominally anhydrous minerals in meteorite and asteroid samples by using SIMS instruments (NanoSIMS 50L and IMS 6f). (PI: Maitrayee Bose; Collaborator: Richard Hervig)</li>
+                        <li>Development of the Duoplasmatron and Cs ion sources on SIMS instruments. (Collaborator: Peter Williams)</li>
+                        <li>Assisting in building a Class 10000 clean lab at ASU (PI: Maitrayee Bose).</li>
+                        <li>Assisting in tuning and operating the NanoSIMS 50L:
+                            <ul class="apple-list" style="margin-top: 8px;">
+                                <li>Water contents and H isotopic compositions in NAMs from impacted Martian meteorites (PI: Anne Peslier).</li>
+                                <li>Li diffusion in zircon (PI: Christy Till).</li>
+                                <li>Searching and imaging of presolar grains in meteorites (PI: Maitrayee Bose).</li>
+                                <li>C, O, and H isotopes in carbonates from carbonaceous chondrites (PI: Myriam Telus).</li>
+                                <li>C-N isotopic distribution in bee's brain (PI: Tyler Quigley).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="exp-group">
+                    <div class="exp-header">2015 - 2017 — GeoForschung Zentrum, Potsdam, Germany</div>
+                    <ul class="apple-list">
+                        <li>SIMS reference material development: project planning and executing on synthetic silicate glass, synthetic olivine, and natural hornblende. (PI: Michael Wiedenbeck)</li>
+                        <li>Defining SIMS primary beam sputtering behaviors. (PI: Michael Wiedenbeck)</li>
+                        <li>The micro-analytical isotopic homogeneity characterization of existing certified O and C isotopic reference materials. (PI: Michael Wiedenbeck)</li>
+                    </ul>
+                </div>
+
+                <div class="exp-group">
+                    <div class="exp-header">2012 - 2015 — China University of Geosciences, Beijing, China</div>
+                    <ul class="apple-list">
+                        <li>Study of metallogeny of Jinling skarn-type iron deposit in the North China Craton: Based on EMPA, ICPMS and LA-ICPMS analyses on igneous rocks and altered minerals. (PI: Zhaochong Zhang)</li>
+                        <li>Study of the growth and evolution of continental crust in Central Tianshan area, Xinjiang, Northwest China: by field mapping and whole rock geochemistry and mineral chemistry analyses on igneous rocks. (PI: Zhaochong Zhang)</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Publications -->
+        <section id="Publications">
+            <h2 class="section-header">Publications</h2>
+            <div class="bento-card">
+                <p style="color: var(--accent-orange); font-weight: 600; margin-bottom: 16px;">Selected Papers (* corresponding author)</p>
+                <ul class="apple-list pub-list">
+                    <li>
+                        P. Liu*, <b>Z. Jin*</b>, Z. Gong, L. Li, K. Wang, X. Zeng, J. Liu, D. Song, H. Du*, K. Zhu, C. Yan, J. Li, K. Zhang, W. Williams, A. Hirt (2026), Magnetic vortex state of natural lunar γ-Fe. <b>Proceedings of the National Academy of Sciences (PNAS)</b>. <i>In press</i>
+                    </li>
+                    <li>
+                        J. Xiang, W. Neumann, Y. Li, L. Jin, Y. Zhu, <b>Z. Jin*</b> (2026), Sorting and recycling processes of early inner Solar System materials. <b>Astronomy & Astrophysics</b>. [<a href="https://www.aanda.org/articles/aa/full_html/2026/06/aa60136-26/aa60136-26.html" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        X. Zeng, <b>Z. Jin*</b>, M. Bose, R. Hervig, T. Long (2025), Effects of Crystal Orientation and Temperature on Space Irradiation of Silicates. <b>The Astrophysical Journal</b>. [<a href="https://iopscience.iop.org/article/10.3847/1538-4357/adfec9" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        X. Zeng, <b>Z. Jin*</b>, C. Dong, Z. Huang, M-H Zhu, L. Xu, L. Morrissey, L. Wang (2025), Earth Wind-Driven Formation of Hematite on the Lunar Surface. <b>Geophysical Research Letters</b>. [<a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL116170" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        <b>Z. Jin*</b>, T. Hou, M-H Zhu, Y. Zhang, O. Namur (2025), Late-stage microstructures in Chang'E-5 basalt and implications for the evolution of lunar ferrobasalt. <b>American Mineralogist</b>. [<a href="https://pubs.geoscienceworld.org/msa/ammin/article-abstract/doi/10.2138/am-2024-9448/646129/Late-stage-microstructures-in-Chang-E-5-basalt-and?redirectedFrom=fulltext" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        <b>Z. Jin*</b>, Y. Zhang, M. Bose, S. Glynn, F. Couffignal (2024), Petrogenesis of Erg Chech 002 Achondrite and Implications for an Altered Magma Ocean. <b>The Astrophysical Journal</b>, 2, 244. [<a href="https://iopscience.iop.org/article/10.3847/1538-4357/ad2ea7/pdf" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        <b>Z. Jin*</b>, M. Bose, T. Lichtenberg, G. Mulders (2021), New evidence for wet accretion of inner solar system planetesimals from meteorites Chelyabinsk and Benenitra. <b>The Planetary Science Journal</b>, 2, 244. [<a href="https://iopscience.iop.org/article/10.3847/PSJ/ac3d86/pdf" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        Q. Xie, Z. Zhang*, <b>Z. Jin*</b>, M. Santosh, L. Han, K. Wang, P. Zhao, H. He (2021), The high-grade Fe skarn deposit of Jinling, North China Craton: Insights into hydrothermal iron mineralization. <b>Ore Geology Reviews</b>, 138, 104395. [<a href="https://www.sciencedirect.com/science/article/abs/pii/S0169136821004212" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        <b>Z. Jin*</b> and M. Bose (2021), Hydration of Nebular Minerals through the Implantation–Diffusion Process. <b>The Astrophysical Journal</b>, 913, 116. [<a href="https://iopscience.iop.org/article/10.3847/1538-4357/abf839" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        <b>Z. Jin*</b> and M. Bose (2019), New clues to ancient water on Itokawa. <b>Science Advances</b>, eaav8106. [<a href="https://www.science.org/doi/10.1126/sciadv.aav8106" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        <b>Z. Jin</b>, Z. Zhang*, M. Santosh, L. Han (2018), Occurrence and chemical compositions of amphiboles in altered dioritic rocks of Laiwu skarn-type iron deposit in West Shandong area, China. <b>Resource Geology</b>, 68(4), 425-445. [<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/rge.12179" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        <b>Z. Jin</b>, Z. Zhang*, M. Santosh, T. Hou, L. Han (2015), Genetic relationship of high-Mg dioritic pluton to iron mineralization: A case study from the Jinling skarn-type iron deposit in the North China Craton. <b>Journal of Asian Earth Sciences</b>, 113, 957-979. [<a href="https://www.sciencedirect.com/science/article/abs/pii/S136791201500173X?via%3Dihub" target="_blank">link</a>]
+                    </li>
+                    <li>
+                        <b>Z. Jin</b>, Z. Zhang*, M. Santosh, H. Huang, T. Hou, Y. Ma (2014), Geochronology and geochemistry of the Airikenqiken granite, Central Tianshan Terrane, Xinjiang, China: implications for petrogenesis and continental growth. <b>International Geology Review</b>, 56, 801-822. [<a href="https://www.tandfonline.com/doi/abs/10.1080/00206814.2014.901159?journalCode=tigr20" target="_blank">link</a>]
+                    </li>
+                </ul>
+                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-color);">
+                    <a href="https://scholar.google.com/citations?user=IO9AYxkAAAAJ&hl=en" target="_blank" style="font-weight: 500;">View Full List of Publications on Google Scholar &gt;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- News -->
+        <section id="News">
+            <h2 class="section-header">News & Updates</h2>
+            <div class="bento-card">
+                <ul class="apple-list">
+                    <li><span class="news-date">2026-08</span> Our manuscript of Lunar gamma-Fe from the farside has been accepted for publication in PNAS!</li>
+                    <li><span class="news-date">2026-05</span> First paper of Jinwei Xiang has been accepted for publication in A&A!</li>
+                    <li><span class="news-date">2025-08</span> It’s been a while since my last update—lots of things to take care of lately. Some great news though: two of Dr. Xiandi Zeng’s manuscripts have just been accepted, one in GRL and the other in ApJ!!</li>
+                    <li><span class="news-date">2025-03</span> Dr. Zeng gave his first-ever talk at LPSC in The Woodlands, and he received fantastic questions from the audience! Check <a href="https://www.hou.usra.edu/meetings/lpsc2025/pdf/1756.pdf" target="_blank">this</a> out.</li>
+                    <li><span class="news-date">2024-12</span> The first farside lunar samples, CE-6 samples arrived in Macau!</li>
+                    <li><span class="news-date">2023-03</span> Our ion implanter has been well installed in A101 at M.U.S.T.!</li>
+                    <li><span class="news-date">2023-01</span> Our ion implanter arrived!</li>
+                    <li><span class="news-date">2022-12</span> My first Postdoc Dr. Xiandi Zeng joined my group.</li>
+                    <li><span class="news-date">2022-01</span> Happy New Year!</li>
+                    <li><span class="news-date">2021-12</span> Our new paper was just published in the <b>Planetary Science Journal</b>. Check it out <a href="https://iopscience.iop.org/article/10.3847/PSJ/ac3d86/pdf" target="_blank">here</a>.</li>
+                    <li><span class="news-date">2021-10</span> Chang'E-5 lunar samples arrive in our SKLplanets. <b>Dr. Zhu Menghua</b> received a small bottle of lunar soil and <b>Dr. Li Shaolin</b> got a piece of lunar basalts.</li>
+                    <li><span class="news-date">2021-06</span> Our new paper was just published in the <b>Astrophysical Journal</b>. Check it out <a href="https://iopscience.iop.org/article/10.3847/1538-4357/abf839" target="_blank">here</a>.</li>
+                    <li><span class="news-date">2020-10</span> Just started my new position as an assistant professor at Macau University of Science and Technology.</li>
+                    <li><span class="news-date">2020-01</span> I left the U.S. on 19th. Many thanks to my postdoc supervisor <b>Dr. Maitrayee Bose</b>. Professors <b>Peter Williams</b> and <b>Richard Hervig</b> have also helped and taught me so much! I really had a great time in the last 3 years at ASU. I will miss you all there. Take care!</li>
+                </ul>
+            </div>
+        </section>
+
     </div>
-    <div style="float: right; width: 50%;">
-        <img src="profile.jpg" alt="Profile Image" style="max-width: 50%; height: auto;">
-    </div>
-</div>
 
+    <!-- Footer with Visitor Counter -->
+    <footer>
+        <div class="visitor-counter" title="Total Page Views">
+            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fziliangjin.github.io&count_bg=%232997FF&title_bg=%231C1C1E&icon=eye.svg&icon_color=%23F5F5F7&title=Views&edge_flat=true" alt="Page Views Counter"/>
+        </div>
+        <p>© 2026 Ziliang Jin. State Key Laboratory of Lunar and Planetary Sciences, Macau University of Science and Technology.</p>
+    </footer>
 
-<!-- The Interest Section -->
-  <div class="w3-container w3-padding-32" id="Research">
-   <h2>Research Interests</h2>
-     <ul>
-       <p><li> Derivation and migration of the primordial materials in the solar system </li></p>
-       <p><li> Planet differentiation processes </li></p>
-       <p><li> Space process laboratory simulations </li></p>
-       
-     </ul>
-  </div>
-
-
-<!-- The Grants Section -->
-  <div class="w3-container w3-padding-32" id="Fund">
-   <h2>Fund</h2>
-     <ul>
-       <p><li> <b>FDCT</b> (2021-2023) – PI: A comprehensive study of mineral disequilibrium in the achondrite EC002. </li></p>
-       <p><li> <b>FDCT</b> (2023-2024) – PI: Process development: ion-impanated reference materials used for in-situ analysis. </li></p>
-       <p><li> <b>NSFC</b> (2023-2025) – PI: A comprehensive study of the hydrogen implantation-diffusion process that hydrates the silicates in the solar nebula. </li></p>
-       <p><li> <b>FDCT</b> (2025-2028) – Co-PI: Research on key scientific and technological questions in extraterrestrial sample analysis. </li></p>
-     </ul>
-  </div>
-
-<!-- The experience Section -->
-  <div class="w3-container w3-padding-32" id="Experience">
-    <h2>Professional Experiences</h2>
-    <ul>
-<p><b><i>Since 2020, Macao University of Science and Technology, China </i></b></p>
-<li><p>Managing: (1) Laser ablation-inductive coupled plasma mass spectrometry (LA-ICP-MS), GeoLasHD + Agilent 7900; (2) Ion implanter  </p></li>
-<li><p>Simulating the hydration processes of the early solar system materials via ion implantation.</p></li>
-<li><p>Research on the loss of volatile elements of the Moon. </p></li>
-</ul>
-  
-<ul>
-<p><b><i>2017-2020, Arizona State University, Arizona, U.S.</i></b></p>
-<li><p>Sustaining laboratory services: daily checking and maintaining, ordering and purchasing lab items, scheduling and executing. </p></li>
-<li><p>Development of key protocols for high-precision H measurement using the NanoSIMS 50L at ASU.</p></li>
-<li><p>Study of the hydrogen isotope systematics of nominally anhydrous minerals in the meteorite and asteroid samples by using SIMS instruments (NanoSIMS 50L and IMS 6f). (PI: Maitrayee Bose; Collaborator: Richard Hervig)</p></li>
-<li><p>Development of the Duoplasmatron and Cs ion sources on SIMS instruments. (Collaborator: Peter Williams) </p></li>
-<li><p>Assisting in building a Class 10000 clean lab at ASU (PI: Maitrayee Bose).</p></li>
-<li><p>Assisting in tuning and operating the NanoSIMS 50L:</p></li>
-  <li><p> Water contents and H isotopic compositions in NAMs from impacted Martian meteorites (PI: Anne Peslier). <p></li>
-  <li><p> Li diffusion in zircon (PI: Christy Till). <p></li>
-  <li><p> Searching and imaging of presolar grains in meteorites (PI: Maitrayee Bose).<p></li>
-  <li><p> C, O, and H isotopes in carbonates from carbonaceous chondrites (PI: Myriam Telus).<p></li>
-  <li><p> C-N isotopic distribution in bee’s brain (PI: Tyler Quigley). <p></li>
-</ul>
-
-<ul>
-<p><b><i>2015-2017, GeoForschung Zentrum, Potsdam, Germany</i></b></p>
-<li><p>SIMS reference material development: project planning and executing on synthetic silicate glass, synthetic olivine, and natural hornblende. (PI: Michael Wiedenbeck)</p></li>
-<li><p>Defining SIMS primary beam sputtering behaviors. (PI: Michael Wiedenbeck)</p></li>
-<li><p>The micro-analytical isotopic homogeneity characterization of existing certified O and C isotopic reference materials. (PI: Michael Wiedenbeck)</p></li>
-</ul>
-
- 
-<ul>  
-<p><b><i>2012-2015, China University of Geosciences, Beijing, China</i></b></p>
-<li><p>Study of metallogeny of Jinling skarn-type iron deposit in the North China Craton: Based on EMPA, ICPMS and LA-ICPMS analyses on the igneous rocks and altered minerals from Jinling skarn-type iron deposit in the North China Craton. (PI: Zhaochong Zhang)</p></li>
-<li><p>Study of the growth and evolution of continental crust in Central Tianshan area, Xinjiang, Northwest China: by field mapping and whole rock geochemistry and mineral chemistry analyses on igneous rocks. (PI: Zhaochong Zhang)</p></li>
-</ul> 
-
-  </div>
-  
-  
- <!-- The Publications Section -->
-  <div class="w3-container w3-padding-32"" id="Publications">
-    <h2>Publications</h2>
-      
-    <p><b>Selected papers</b><p>
-
- <ul>
-<li><p>P. Liu*, <b>Z. Jin*</b>, Z. Gong, L. Li, K. Wang, X. Zeng, J. Liu, D. Song, H. Du*, K. Zhu, C. Yan, J. Li, K. Zhang, W. Williams, A. Hirt (2026), Magnetic vortex state of natural lunar γ-Fe. <b>Proceedings of the National Academy of Sciences (PNAS)</b>. In press </p></li>
-<li><p>J. Xiang, W. Neumann, Y. Li, L. Jin, Y. Zhu, <b>Z. Jin*</b> (2026), Sorting and recycling processes of early inner Solar System materials. <b>Astronomy & Astrophysics</b>. [<a href="https://www.aanda.org/articles/aa/full_html/2026/06/aa60136-26/aa60136-26.html">link</a>]</p></li>
-<li><p>X. Zeng, <b>Z. Jin*</b>, M. Bose, R. Hervig, T. Long (2025), Effects of Crystal Orientation and Temperature on Space Irradiation of Silicates. <b>The Astrophysical Journal</b>. [<a href="https://iopscience.iop.org/article/10.3847/1538-4357/adfec9">link</a>]</p></li>
-<li><p>X. Zeng, <b>Z. Jin*</b>, C. Dong, Z. Huang, M-H Zhu, L. Xu, L. Morrissey, L. Wang (2025), Earth Wind-Driven Formation of Hematite on the Lunar Surface. <b>Geophysical Research Letters</b>. [<a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL116170">link</a>]</p></li>
-<li><p><b>Z. Jin*</b>, T. Hou, M-H Zhu, Y. Zhang, O. Namur (2025), Late-stage microstructures in Chang'E-5 basalt and implications for the evolution of lunar ferrobasalt. <b>American Minerologist</b>. [<a href="https://pubs.geoscienceworld.org/msa/ammin/article-abstract/doi/10.2138/am-2024-9448/646129/Late-stage-microstructures-in-Chang-E-5-basalt-and?redirectedFrom=fulltext">link</a>]</p></li>
-<li><p><b>Z. Jin*</b>, Y. Zhang, M. Bose, S. Glynn, F. Couffignal (2024),Petrogenesis of Erg Chech 002 Achondrite and Implications for an Altered Magma Ocean. <b>The Astrophysical Journal</b>, 2, 244.[<a href="https://iopscience.iop.org/article/10.3847/1538-4357/ad2ea7/pdf">link</a>]</p></li>
-<li><p><b>Z. Jin*</b>, M. Bose, T. Lichtenberg, G. Mulders (2021), New evidence for wet accretion of inner solar system planetesimals from meteorites Chelyabinsk and Benenitra. <b>The Planetary Science Journal</b>, 2, 244.[<a href="https://iopscience.iop.org/article/10.3847/PSJ/ac3d86/pdf">link</a>]</p></li>
-<li><p>Q. Xie, Z. Zhang*, <b>Z. Jin*</b>, M. Santosh, L. Han, K. Wang, P. Zhao, H. He (2021), The high-grade Fe skarn deposit of Jinling, North China Craton: Insights into hydrothermal iron mineralization. <b>Ore Geology Reviews</b>, 138, 104395.[<a href="https://www.sciencedirect.com/science/article/abs/pii/S0169136821004212">link</a>]</p></li>
-<li><p><b>Z. Jin*</b> and M. Bose (2021), Hydration of Nebular Minerals through the Implantation–Diffusion Process. <b>The Astrophysical Journal</b>, 913, 116. [<a href="https://iopscience.iop.org/article/10.3847/1538-4357/abf839">link</a>]</p></li>
-<li><p><b>Z. Jin*</b> and M. Bose (2019), New clues to ancient water on Itokawa. <b>Science Advances</b>, eaav8106.[<a href="https://www.science.org/doi/10.1126/sciadv.aav8106">link</a>]</p></li>
-<li><p><b>Z. Jin</b>, Z. Zhang*, M. Santosh, L. Han (2018), Occurrence and chemical compositions of amphiboles in altered dioritic rocks of Laiwu skarn-type iron deposit in West Shandong area, China. <b>Resource Geology</b>, 68(4), 425-445.[<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/rge.12179">link</a>]</p></li>
-<li><p><b>Z. Jin</b>, Z. Zhang*, M. Santosh, T. Hou, L. Han (2015), Genetic relationship of high-Mg dioritic pluton to iron mineralization: A case study from the Jinling skarn-type iron deposit in the North China Craton. <b>Journal of Asian Earth Sciences</b>, 113, 957-979.[<a href="https://www.sciencedirect.com/science/article/abs/pii/S136791201500173X?via%3Dihub">link</a>]</p></li>
-<li><p><b>Z. Jin</b>, Z. Zhang*, M. Santosh, H. Huang, T. Hou, Y. Ma (2014), Geochronology and geochemistry of the Airikenqiken granite, Central Tianshan Terrane, Xinjiang, China: implications for petrogenesis and continental growth. <b>International Geology Review</b>, 56, 801-822.[<a href="https://www.tandfonline.com/doi/abs/10.1080/00206814.2014.901159?journalCode=tigr20">link</a>] </p></li>
-
-<p><i><b>Note</b>: * corresponding author</i></p>
-<p><a href="https://scholar.google.com/citations?user=IO9AYxkAAAAJ&hl=en">Full list of publications in Google Scholar</a>.</p>
-</ul>
-                                                                         
-</div>
-
-
-<!-- The News Section -->
-  <div class="w3-container w3-padding-32" id="News">
-   <h2>News</h2>
-     <ul>
-      <p><li> <b>2026-8</b> Our manuscript of Lunar gamma-Fe from the farside has been accepted for publication in PNAS! </li></p>
-      <p><li> <b>2026-5</b> First paper of Jinwei Xiang has been accepted for publication in A&A! </li></p>
-      <p><li> <b>2025-8</b> It’s been a while since my last update—lots of things to take care of lately. Some great news though: two of Dr. Xiandi Zeng’s manuscripts have just been accepted, one in GRL and the other in ApJ!!</li></p>
-      <p><li> <b>2025-3</b> Dr. Zeng gave his first-ever talk at LPSC in The Woodlands, and he received fantastic questions from the audience! Check <a href="https://www.hou.usra.edu/meetings/lpsc2025/pdf/1756.pdf">this</a> out .</li></p>
-      <p><li> <b>2024-12</b> The first farside lunar samples, CE-6 samples arrived in Macau! </li></p>
-      <p><li> <b>2023-3</b> Our ion implantor has been well installed in A101 at M.U.S.T.! </li></p>
-      <p><li> <b>2023-1</b> Our ion implantor arrived! </li></p>
-      <p><li> <b>2022-12</b> My first Postdoc Dr. Xiandi Zeng joint my group. </li></p>
-       <p><li> <b>2022-1</b> Happy New Year! </li></p>
-      <p><li> <b>2021-12</b> Our new paper was just published in the <b>Planetary Science Journal</b>. Check it out <a href="https://iopscience.iop.org/article/10.3847/PSJ/ac3d86/pdf">here</a>.</li></p>
-      <p><li> <b>2021-10</b> Chang'E-5 lunar samples arrive in our SKLplanets. <b>Dr. Zhu Menghua</b> received a small bottle of lunar soil and <b>Dr. Li Shaolin</b> got a piece of lunar basalts.</li></p>
-      <p><li> <b>2021-6</b> Our new paper was just published in the <b>Astrophysical Journal</b>. Check it out <a href="https://iopscience.iop.org/article/10.3847/1538-4357/abf839">here</a>.</li></p>
-      <p><li> <b>2020-10</b> Just start my new position as an assistant professor at Macau University of Science and Technology. </li></p>
-      <p><li> <b>2020-1</b> I left the U.S. on 19th. Many thanks to my postdoc supervisor <b>Dr. Maitrayee Bose</b>. Professors <b>Peter Williams</b> and <b>Richard Hervig</b> have also helped and taught me so much! I really had a great time in last 3 years at ASU. I will miss you all there. Take care!  </li></p>                                          
-                                                   
-  </ul>
-  </div>                                                                         
-                                                                         
-                                                                         
-                                                                         
-                                                                         
 </body>
 </html>
-
-
-
